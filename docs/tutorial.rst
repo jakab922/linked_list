@@ -18,7 +18,7 @@ Suppose now we want to pop the last element.
 We can do it with the :class:`~linked_list.tools.popback` 
 operation like this:
 
-    >>> ll.popback(lst)
+    >>> ll.popback(lst).data
     4
 
 Now our list has only 4 elements. Now suppose we want to delete the third
@@ -54,7 +54,7 @@ The only operation that we haven't seen before is the
 Let's see an example for that one too:
 
     >>> lst = lst.nxt
-    >>> ll.popfront(lst)
+    >>> ll.popfront(lst).data
     0
 
 And basically that's all what this package is currently capable of.

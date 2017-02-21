@@ -11,15 +11,17 @@ def setup(linked_list=True):
 
 def test_pushback_works_ll():
     s, o = setup()
-    ll.pushback(s, o)
+    node = ll.pushback(s, o)
     assert s.nxt == o
+    assert node == o
 
 
 def test_pushback_works_dll():
     s, o = setup(False)
-    ll.pushback(s, o)
+    node = ll.pushback(s, o)
     assert s.nxt == o
     assert o.prev == s
+    assert node == o
 
 
 def test_pushback_mixed_types_fail():
@@ -32,9 +34,10 @@ def test_pushback_mixed_types_fail():
 
 def test_pushfront_works_dll():
     s, o = setup(False)
-    ll.pushfront(s, o)
+    node = ll.pushfront(s, o)
     assert o.nxt == s
     assert s.prev == o
+    assert node == o
 
 
 def test_pushfront_mixed_types_fail():
@@ -48,28 +51,46 @@ def test_pushfront_mixed_types_fail():
 def test_popback_works_ll():
     s, o = setup()
     ll.pushback(s, o)
-    data = ll.popback(s)
-    assert data == 2
+    node = ll.popback(s)
     assert s.nxt is None
-    assert o.data is None and o.nxt is None
+    assert node == o
+    assert node.data == 2
+
+
+def test_popback_works_with_one_element_ll():
+    s = ll.LL(1)
+    node = ll.popback(s)
+    assert node == s
 
 
 def test_popback_works_dll():
     s, o = setup(False)
     ll.pushback(s, o)
-    data = ll.popback(s)
-    assert data == 2
+    node = ll.popback(s)
     assert s.nxt is None
-    assert o.data is None and o.nxt is None and o.prev is None
+    assert node == o
+    assert node.data == 2 and node.prev is None
+
+
+def test_popback_works_with_one_element_dll():
+    s = ll.DLL(1)
+    node = ll.popback(s)
+    assert node == s
 
 
 def test_popfront_works():
     s, o = setup(False)
     ll.pushfront(s, o)
-    data = ll.popfront(s)
-    assert data == 2
+    node = ll.popfront(s)
     assert s.prev is None
-    assert o.data is None and o.nxt is None and o.prev is None
+    assert node == o
+    assert node.data == 2 and node.nxt is None
+
+
+def test_popfront_works_with_one_element():
+    s = ll.DLL(1)
+    node = ll.popfront(s)
+    assert node == s
 
 
 def test_delete_works_ll():

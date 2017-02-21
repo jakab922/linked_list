@@ -12,7 +12,10 @@ def pushback(lst, node):
     :param lst: Is a member of the list where we want to insert the *node*.
     :param node: The node which we want to insert into the linked list.
 
+    :returns: Returns *node* after inserting it.
+
     :Example:
+
     >>> import linked_list as ll
     >>> lst = ll.LL(1)
     >>> node = ll.LL(2)
@@ -32,6 +35,8 @@ def pushback(lst, node):
     if tn == DLL:
         node.prev = curr
 
+    return node
+
 
 def pushfront(lst, node):
     """Pushes an element to the beginning of the linked list.
@@ -44,7 +49,10 @@ def pushfront(lst, node):
     :param lst: Is a member of the list where we want to insert the *node*.
     :param node: The node which we want to insert into the linked list.
 
+    :returns: The *node* that we inserted.
+
     :Example:
+
     >>> import linked_list as ll
     >>> lst = ll.DLL(1)
     >>> node = ll.DLL(2)
@@ -62,6 +70,8 @@ def pushfront(lst, node):
     curr.prev = node
     node.nxt = curr
 
+    return node
+
 
 def popfront(lst):
     """This pops the element from the beginning of the linked list.
@@ -73,27 +83,29 @@ def popfront(lst):
     :param lst: Is a member of the list where we want to pop 
                 the first element from.
     
-    :returns: The data member of the first node.
+    :returns: The first node.
 
     :Example:
+
     >>> import linked_list as ll
     >>> lst = ll.DLL(1)
     >>> node = ll.DLL(2)
     >>> ll.pushback(lst, node)
-    >>> popfront(lst)
+    >>> popfront(lst).data
     1
     """
     assert type(lst) == DLL
-    assert lst.prev is not None
+    if lst.prev is None:
+        if lst.nxt is not None:
+            lst.nxt.prev, lst.nxt = None, None
+        return lst
 
     curr = lst
     while curr.prev is not None:
         curr = lst.prev
 
-    curr.nxt.prev = None
-    data = curr.data
-    curr.delete()
-    return data
+    curr.nxt.prev, curr.nxt, curr.prev = None, None, None
+    return curr
 
 
 def popback(lst):
@@ -107,28 +119,33 @@ def popback(lst):
     :param lst: Is a member of the list where we want to pop 
                 the last element from.
     
-    :returns: The data member of the last node.
+    :returns: Returns the last node.
 
     :Example:
+
     >>> import linked_list as ll
     >>> lst = ll.LL(1)
     >>> node = ll.LL(2)
     >>> ll.pushback(lst, node)
-    >>> popback(lst)
+    >>> popback(lst).data
     2
     """
-    assert type(lst) in (LL, DLL)
-    assert lst.nxt is not None
+    tl = type(lst)
+    assert tl in (LL, DLL)
+    if lst.nxt is None:
+        if tl == DLL and lst.prev is not None:
+            lst.prev.nxt, lst.prev = None, None
+        return lst
+
     prev = lst
     curr = lst.nxt
-
     while curr.nxt is not None:
         prev, curr = curr, curr.nxt
 
     prev.nxt = None
-    data = curr.data
-    curr.delete()
-    return data
+    if tl == DLL:
+        curr.prev = None
+    return curr
 
 
 def delete(ancestor, node):
@@ -145,6 +162,7 @@ def delete(ancestor, node):
     :param node: The node we want to delete from the list.
 
     :Example:
+
     >>> import linked_list as ll
     >>> lst = ll.LL(1)
     >>> node = ll.LL(2)
@@ -158,12 +176,11 @@ def delete(ancestor, node):
     assert tn == type(ancestor)
     assert tn in (LL, DLL)
 
-    if ancestor is not None:
-        curr = ancestor
-        while curr.nxt is not None and curr.nxt != node:
-            curr = curr.nxt
-        curr.nxt = node.nxt
-        if tn == DLL and node.nxt is not None:
-            node.nxt.prev = curr
+    curr = ancestor
+    while curr.nxt not in (None, node):
+        curr = curr.nxt
+    curr.nxt = node.nxt
+    if tn == DLL and node.nxt is not None:
+        node.nxt.prev = curr
     node.delete()
 
