@@ -8,7 +8,7 @@ def readme():
 
 setup(
     name="linked_list",
-    version="0.0.1",
+    version="0.0.2",
     description="Classes for linked lists and doubly linked lists",
     long_description=readme(),
     classifiers=[
@@ -18,6 +18,7 @@ setup(
     ],
     keywords='linked list data structure',
     url="https://github.com/jakab922/linked_list",
+    download_url="https://github.com/jakab922/linked_list/tarball/0.0.2",
     author="Daniel Papp",
     author_email="jakab922@gmail.com",
     license="MIT",
