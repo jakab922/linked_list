@@ -1,11 +1,13 @@
-Linked list package
--------------------
+# linked_list module
 
-This package currently supports linked lists and doubly linked lists. Push and pop operations are supported where appropriate.
+This package currently supports singly linked lists and doubly linked lists. Push and pop and delete operations are supported.
 
-Sample usage:
+## Installation
 
-    >>> import linked_list as ll
-    >>> lst = LL(data=1)
-    >>> pushback(lst, LL(data=2))
-    >>> print popfront(lst)[1] # Will print 1
+You can install the package via pip:
+
+    pip install linked_list
+
+## Documentation
+
+You can find the documentation on [Read the Docs](http://linked-list.readthedocs.io/en/latest/)
