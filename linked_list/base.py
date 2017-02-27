@@ -5,3 +5,6 @@ class LLBase(object):
         self.data = None
         self.nxt = None
 
+    def __str__(self):
+        return str(self.data)
+

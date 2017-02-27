@@ -12,10 +12,21 @@ class LL(LLBase):
     - *nxt*: Points to the next node in the linked
              or it's `None` if there is no next node.
     """
-    nxt = None
-    data = None
+    data, nxt = None, None
 
     def __init__(self, data=None, nxt=None):
         self.nxt = nxt
         self.data = data
 
+    def __repr__(self):
+        ret, curr = [], self
+        while curr is not None:
+            ret.append(curr.data)
+            curr = curr.nxt
+        return "->".join(map(str, ret))
+
+    def __len__(self):
+        ret, curr = 0, self
+        while curr is not None:
+            ret, curr = ret + 1, curr.nxt
+        return ret

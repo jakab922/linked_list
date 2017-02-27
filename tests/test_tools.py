@@ -131,3 +131,38 @@ def test_delete_mixed_types_fail():
             ll.delete(a, b)
 
 
+def test_from_list():
+    lst = [1, 2, 3]
+    head = ll.from_list(lst)
+    assert type(head) == ll.LL
+    assert head.data == 1
+    assert head.nxt.data == 2
+    assert head.nxt.nxt.data == 3
+    assert head.nxt.nxt.nxt is None
+
+
+def test_doubly_from_list():
+    lst = [1, 2, 3]
+    head = ll.from_list(lst, True)
+    assert type(head) == ll.DLL
+    assert head.data == 1 and head.prev is None
+    assert head.nxt.data == 2 and head.nxt.prev == head
+    assert head.nxt.nxt.data == 3 and head.nxt.nxt.prev == head.nxt
+    assert head.nxt.nxt.nxt is None
+
+
+def test_to_list():
+    head = ll.LL(0)
+    ll.pushback(head, ll.LL(1))
+    ll.pushback(head, ll.LL(2))
+    lst = ll.to_list(head)
+    assert lst == range(3)
+
+
+def test_doubly_to_list():
+    head = ll.DLL(0)
+    ll.pushback(head, ll.DLL(1))
+    ll.pushback(head, ll.DLL(2))
+    lst = ll.to_list(head)
+    assert lst == range(3)
+

@@ -27,3 +27,28 @@ class DLL(LLBase):
         super(DLL, self).delete()
         self.prev = None
 
+    def __repr__(self):
+        before, after = [], []
+        curr = self
+        while curr is not None:
+            after.append(curr.data)
+            curr = curr.nxt
+
+        curr = self
+        while curr is not None:
+            before.append(curr.data)
+            curr = curr.prev
+
+        before = before[::-1][:-1]
+        before.extend(after)
+        return "<->".join(map(str, before))
+
+    def __len__(self):
+        ret, curr = 1, self
+        while curr.prev is not None:
+            ret, curr = ret + 1, curr.nxt
+        curr = self
+        while curr.nxt is not None:
+            ret, curr = ret + 1, curr.nxt
+        return ret
+

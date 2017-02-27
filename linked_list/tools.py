@@ -184,3 +184,107 @@ def delete(ancestor, node):
         node.nxt.prev = curr
     node.delete()
 
+
+def from_list(lst, doubly=False):
+    """This creates a new (doubly) linked list from a list.
+
+    The function is quite straightforward and creates a (doubly)
+    linked list in :math:`\mathcal{O}(n)` time.
+
+    :param lst: The python list from which we create the (doubly)
+                linked list from.
+    :param doubly: If `True` the function creates a doubly linked
+                   list. By default it's `False`.
+
+    :returns: The created (doubly) linked list
+
+    :Example:
+
+    >>> import linked_list as ll
+    >>> lst = [1, 2]
+    >>> head = from_list(lst)
+    >>> (head.data, head.nxt.data, head.nxt.nxt)
+    (1, 2, None)
+    """
+    if len(lst) == 0:
+        return None
+
+    cls = LL if not doubly else DLL
+    ret = curr = cls(0)
+    for el in lst:
+        curr.data = el
+        curr = pushback(curr, cls(0))
+
+    popback(ret)
+    return ret
+
+
+def to_list(head):
+    """This creates a list from a (doubly) linked list.
+
+    The function creates a list from a (doubly) linked
+    list in :math:`\mathcal{O}(n)` time.
+
+    :param head: The head node of the linked list or
+                 any node of the doubly linked list.
+
+    :returns: The created list.
+
+    :Example:
+
+    >>> import linked_list as ll
+    >>> head = ll.DLL(0)
+    >>> ll.pushback(head, ll.LL(1))
+    >>> ll.pushback(head, ll.LL(2))
+    >>> ll.to_list(head.nxt)
+    [0, 1, 2]
+    """
+    assert type(head) in (LL, DLL)
+
+    ret, curr = [], head
+    if type(curr) == DLL:
+        while curr.prev is not None:
+            curr = curr.prev
+
+    while curr is not None:
+        ret.append(curr.data)
+        curr = curr.nxt
+
+    return ret
+
+
+def iter_list(node, backward=False):
+    """Iterates through the elements of a list.
+
+    This function iterates through the elements
+    of the (doubly) linked list. If backward
+    is `True` and it's a doubly linked list
+    then it iterates backwards.
+
+    :param node: The node where the iteration
+                 starts from.
+    :param backward: This is `False` by default.
+                     If it's set to `True` then
+                     it iterates backwards.
+
+    :Example:
+
+    >>> import linked_list as ll
+    >>> head = ll.from_list(range(3))
+    >>> for el in iter_list(head):
+    ...   el
+    ... 
+    0
+    1
+    2
+    """
+    tn = type(node)
+    assert tn in (LL, DLL)
+    if backward:
+        assert tn == DLL
+
+    while node is not None:
+        yield node
+        node = node.prev if backward else node.nxt
+    raise StopIteration
+

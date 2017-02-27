@@ -31,6 +31,36 @@ operation:
 
 As we can see this deleted the third element from the list.
 
+We can create linked lists from python lists with the help
+of the :class:`~linked_list.tools.from_list` operation:
+
+    >>> lst = range(2)
+    >>> head = ll.from_list(lst)
+    >>> head.nxt.data
+    1
+
+We can also transform linked lists back to python lists by 
+using the :class:`~linked_list.tools.to_list`:
+
+    >>> lst2 = ll.to_list(head)
+    >>> print 1 if lst2 == lst else 2
+    1
+
+We can also iterate through the elements of a linked list
+using the :class:`~linked_list.tools.iter_list` function:
+
+    >>> for el in iter_list(head):
+    ...   el
+    ...
+    0
+    1
+    2
+
+Also linked lists have a nice string representation:
+
+    >>> head
+    0->1->2
+
 
 Working with doubly linked lists
 --------------------------------
@@ -57,5 +87,22 @@ Let's see an example for that one too:
     >>> ll.popfront(lst).data
     0
 
-And basically that's all what this package is currently capable of.
+The :class:`~linked_list.tools.from_list` function works a little
+bit differently for the :class:`~linked_list.dll.DLL` class and the
+class as a different string representation so one can distinguish
+between the two different linked list classes:
 
+    >>> head = ll.from_list(range(2), True)
+    >>> head
+    0<->1<->2
+
+Also we can iterate backwards on doubly linked lists:
+
+    >>> for el in iter_list(head.nxt.nxt, True):
+    ...   el
+    ...
+    2
+    1
+    0
+
+And basically that's all what this package is currently capable of.

@@ -13,3 +13,15 @@ def test_deletes_correctly():
     s.delete()
     assert s.nxt is None and s.data is None
 
+
+def test_iteration_works():
+    lst = range(3)
+    head = ll.from_list(lst)
+    for i, el in enumerate(ll.iter_list(head)):
+        assert el.data == lst[i]
+
+
+def test_representation_works():
+    head = ll.from_list(range(3))
+    assert repr(head) == "0->1->2"
+
