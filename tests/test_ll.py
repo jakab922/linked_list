@@ -1,4 +1,5 @@
 import linked_list as ll
+from random import randint as ri
 
 
 def test_inits_correctly():
@@ -24,4 +25,11 @@ def test_iteration_works():
 def test_representation_works():
     head = ll.from_list(range(3))
     assert repr(head) == "0->1->2"
+
+
+def test_len_works():
+    for _ in xrange(10):
+        length = ri(1, 100)
+        head = ll.from_list(range(length))
+        assert len(head) == length
 

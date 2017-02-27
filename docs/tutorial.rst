@@ -61,6 +61,13 @@ Also linked lists have a nice string representation:
     >>> head
     0->1->2
 
+The `len` function works on linked lists:
+
+    >>> len(head)
+    3
+    >>> len(head.nxt)
+    2
+
 
 Working with doubly linked lists
 --------------------------------
@@ -104,5 +111,13 @@ Also we can iterate backwards on doubly linked lists:
     2
     1
     0
+
+The `len` function also works for doubly linked lists, but it
+always reports the length of the list in both directions:
+
+    >>> len(head)
+    3
+    >>> len(head.nxt)
+    3
 
 And basically that's all what this package is currently capable of.

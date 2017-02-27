@@ -44,11 +44,11 @@ class DLL(LLBase):
         return "<->".join(map(str, before))
 
     def __len__(self):
-        ret, curr = 1, self
-        while curr.prev is not None:
-            ret, curr = ret + 1, curr.nxt
+        ret, curr = 0, self
+        while curr is not None:
+            ret, curr = ret + 1, curr.prev
         curr = self
-        while curr.nxt is not None:
+        while curr is not None:
             ret, curr = ret + 1, curr.nxt
-        return ret
+        return ret - 1
 
