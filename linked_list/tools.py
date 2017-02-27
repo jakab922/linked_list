@@ -288,3 +288,26 @@ def iter_list(node, backward=False):
         node = node.prev if backward else node.nxt
     raise StopIteration
 
+
+def reverse(head):
+    """Reverses a singly linked list.
+
+    Reverses a singly linked list in 
+    :math:`\mathcal{O}(n)` time.
+
+    :param head: The head of the list to be
+                 reversed.
+
+    :returns: The reversed list.
+    """
+    stack = []
+    for el in iter_list(head):
+        stack.append(el.data)
+
+    ret = cret = LL(0)
+    while stack:
+        cret.data = stack.pop()
+        if stack:
+            cret = pushback(cret, LL(0))
+    
+    return ret

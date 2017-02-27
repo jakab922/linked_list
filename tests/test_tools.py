@@ -1,5 +1,6 @@
 import linked_list as ll
 import pytest
+from random import randint as ri
 
 
 def setup(linked_list=True):
@@ -165,4 +166,13 @@ def test_doubly_to_list():
     ll.pushback(head, ll.DLL(2))
     lst = ll.to_list(head)
     assert lst == range(3)
+
+
+def test_reverse_works():
+    for _ in xrange(100):
+        lst = [ri(1, 20) for _2 in xrange(20)]
+        head = ll.from_list(lst)
+        rhead = ll.reverse(head)
+        rlst = ll.to_list(rhead)
+        assert rlst == lst[::-1]
 

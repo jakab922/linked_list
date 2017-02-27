@@ -68,12 +68,21 @@ The `len` function works on linked lists:
     >>> len(head.nxt)
     2
 
+One can also reverse a singly linked lists with the
+:class:`~linked_list.tools.reverse` operation:
+
+    >>> rhead = ll.reverse(head)
+    >>> rhead
+    2->1->0
+
 
 Working with doubly linked lists
 --------------------------------
 
-All the operations of the singly linked lists also support
-doubly linked lists(:class:`~linked_list.dll.DLL`). 
+All the operations of the singly linked lists(
+other than :class:`~linked_list.tools.reverse`) 
+also support doubly linked 
+lists(:class:`~linked_list.dll.DLL`). 
 Let's create a linked list by pushing
 elements with :class:`~linked_list.tools.pushfront` 
 to the beginning of the list:

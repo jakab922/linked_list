@@ -30,3 +30,8 @@ Functions to iterate through the elements of the linked list.
 -------------------------------------------------------------
 
 .. autofunction:: iter_list
+
+Miscellaneous functions
+-----------------------
+
+.. autofunction:: reverse
